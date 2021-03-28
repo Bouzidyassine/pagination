@@ -5,27 +5,32 @@
 
 
 <?PHP
+    // gerer le fichier de données:
     $etudiants = array();
     $f = fopen("elevesYm2 (1).csv", "r");
     while($ligne = fgetcsv($f)){
         array_push($etudiants, array($ligne[0], $ligne[1]));
+        
     }
 ?>
-<center>
-    <?php 
 
-        @$page=$_GET["page"];    
-        $nbr_ele_par_page = 1;
-        $n_pages = ceil(count($etudiants)/$nbr_ele_par_page);
-        $etudiant=$page;
-        $debut=($page-1)*$nbr_ele_par_page;
-        for($i=1;$i<=$n_pages;$i++){
-            echo "<a href= ''>$i</a>&nbsp;";
-            
-        }
-    
-    ?>
-</center>
+
+<?php 
+
+ 
+
+    @$page=$_GET["page"];    
+    $nbr_ele_par_page = 2;
+    $n_pages = ceil(count($etudiants)/$nbr_ele_par_page);
+    $debut=($page-1)*$nbr_ele_par_page;
+
+
+    for($i=1;$i<=$n_pages;$i++){
+        echo "<a href= '?page=$i'>$i<button></a>&nbsp;";
+}
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +41,6 @@
     <title>Document</title>
 </head>
 <body>
-    <center>
     <?php for($etudiant=1; $etudiant<count($etudiants); $etudiant++) { ?>
         <?php 
             $val = array();
@@ -74,6 +78,6 @@
             </tr>
         </table>
     <?php } ?>
-    </center> 
+    
 </body>
 </html>
